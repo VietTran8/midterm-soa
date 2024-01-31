@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title>Thanh toán học phí</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+      <style>
+        .active{
+          text-decoration: line-through;
+          color: #198754;
+        }
+      </style>
+  </head>
+  <body class="bg-light">
+    <section class="d-flex justify-content-center">
+      <h3 class="m-4 fw-bold" style="color: #087990;">Thanh toán học phí</h3>
+    </section>
+    <section class="container">
+      <div class="row gx-md-3 container">
+        <div class="col-md-6 container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="bg-white p-4 shadow-sm rounded">
+                <div class="row">
+                  <div class="col-12">
+                    <h4 class="mb-4" style="color: #087990;">Thông tin người nộp tiền</h4>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 mt-sm-3 mt-md-0">
+                    <label for="fullName" class="fw-bold">Họ và tên</label>
+                    <input id="fullName" class="form-control" type="text" aria-label="Disabled input example" disabled>
+                  </div>
+                  <div class="col-md-6 mt-sm-3 mt-md-0">
+                    <label for="phoneNumber" class="fw-bold">Số điện thoại</label>
+                    <input id="phoneNumber" class="form-control" type="text" aria-label="Disabled input example" disabled>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-md-12">
+                    <label for="email" class="fw-bold">Email</label>
+                    <input id="email" class="form-control" type="text" aria-label="Disabled input example" disabled>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-sm-4">
+              <div class="col-md-12">
+                <div class="bg-white p-4 shadow-sm rounded">
+                  <div class="row">
+                    <div class="col-12">
+                      <h4 class="mb-4" style="color: #087990;">Thông tin thanh toán</h4>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 mt-sm-3 mt-md-0">
+                      <label for="balance" class="fw-bold">Số dư khả dụng</label>
+                      <input id="balance" class="form-control me-2" type="text" aria-label="Disabled input example" disabled>
+                      <div id="balance-not-enough" class="text-danger d-none mt-2">
+                        Số dư không đủ!
+                    </div>
+                    </div>
+                    <div class="col-md-6 mt-sm-3 mt-md-0">
+                      <label for="totalPay" class="fw-bold">Số tiền cần thanh toán</label>
+                      <input id="totalPay" class="form-control" type="text" placeholder="" aria-label="Disabled input example" disabled>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-md-12">
+                      <div>
+                        <input id="term" class="form-check-input me-1" type="checkbox">
+                        <labe style="user-select: none; cursor: pointer;">Tôi đồng ý với 
+                          <span class="text-primary" data-bs-toggle="modal" data-bs-target="#termModal">thỏa thuận và điều khoản</span>
+                        </labe>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <button id="confirm-payment" class="btn btn-info fw-bold text-white">Xác nhận thanh toán</button>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="bg-white p-4 shadow-sm rounded">
+            <div class="row">
+              <div class="col-12">
+                <h4 class="mb-4" style="color: #087990;">Thông tin học phí</h4>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mt-sm-3 mt-md-0">
+                <label for="studentNumber" class="fw-bold">Mã số sinh viên</label>
+                
+                  <form class="access-student-info" novalidate="">
+                    <div class="d-flex">
+                      <input id="studentNumber" class="form-control me-2" type="text" placeholder="Nhập mã số sinh viên" aria-label="Disabled input example" required>
+                      <button class="btn btn-info"><i class="text-white fa-solid fa-magnifying-glass"></i></button>
+                    </div>
+                    <div id="not-found-message" class="text-danger d-none mt-2">
+                        Không tồn tại sinh viên này!
+                    </div>
+                  </form>
+
+              </div>
+              <div class="col-md-6 mt-sm-3 mt-md-0">
+                <label for="studentFullName" class="fw-bold">Họ và tên sinh viên</label>
+                <input id="studentFullName" class="form-control" type="text" placeholder="" aria-label="Disabled input example" disabled>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-md-12">
+                <label for="tuition" class="fw-bold">Số tiền phải nộp</label>
+                <div class="card card-body">
+                  <ol class="list-group list-group-numbered student-tuition">
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="termModal" tabindex="-1" aria-labelledby="termModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="termModalLabel">Thỏa thuận và điều khoản</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <h3>1. Điều Khoản Chung</h3>
+            <ol>
+              <li><strong>Chấp Nhận Điều Khoản:</strong> Bằng cách sử dụng ứng dụng, bạn đồng ý với tất cả các điều khoản và điều kiện trong thỏa thuận này.</li>
+              <li><strong>Tuân Thủ Luật Pháp:</strong> Bạn cam kết tuân thủ tất cả các luật pháp và quy định liên quan đến việc sử dụng ứng dụng thanh toán học phí.</li>
+            </ol>
+          
+            <h3>2. Thanh Toán Học Phí</h3>
+            <ol>
+              <li><strong>Phí Dịch Vụ:</strong> Khi sử dụng ứng dụng thanh toán học phí, bạn đồng ý chịu trách nhiệm thanh toán mọi khoản phí dịch vụ được xác định.</li>
+              <li><strong>An Toàn Thanh Toán:</strong> Chúng tôi đảm bảo sự an toàn và bảo mật trong quá trình thanh toán thông qua các phương tiện thanh toán được hỗ trợ.</li>
+            </ol>
+            <h3>3. Quyền Lợi và Trách Nhiệm</h3>
+            <ol>
+              <li><strong>Quyền Lợi Người Dùng:</strong> Người sử dụng có quyền truy cập và sử dụng ứng dụng thanh toán học phí theo quy định.</li>
+              <li><strong>Trách Nhiệm Người Dùng:</strong> Người sử dụng chịu trách nhiệm về độ chính xác và đầy đủ của thông tin cung cấp.</li>
+            </ol>
+          
+            <h3>4. Chính Sách Bảo Mật</h3>
+            <ol>
+              <li><strong>Bảo Mật Thông Tin:</strong> Chúng tôi cam kết bảo vệ thông tin cá nhân của bạn và tuân thủ các chính sách bảo mật liên quan.</li>
+              <li><strong>Quyền Riêng Tư:</strong> Chúng tôi tôn trọng quyền riêng tư của người sử dụng và không chia sẻ thông tin cá nhân với bên thứ ba không được ủy quyền.</li>
+            </ol>
+          
+            <h3>5. Chấm Dứt Sử Dụng</h3>
+            <ol>
+              <li><strong>Chấm Dứt Bởi Người Dùng:</strong> Bạn có thể chấm dứt sử dụng ứng dụng bất cứ lúc nào theo quy định của chúng tôi.</li>
+              <li><strong>Chấm Dứt Bởi Chúng Tôi:</strong> Chúng tôi có quyền chấm dứt hoặc tạm ngưng tài khoản của bạn nếu bạn vi phạm bất kỳ điều khoản nào trong thỏa thuận này.</li>
+            </ol>
+          
+            <h3>6. Thay Đổi Điều Khoản</h3>
+            <ol>
+              <li><strong>Quyền Sửa Đổi:</strong> Chúng tôi có quyền sửa đổi bất kỳ điều khoản nào trong thỏa thuận này mà không cần báo trước. Bạn nên kiểm tra định kỳ để cập nhật thông tin mới.</li>
+            </ol>
+          
+            <p>Bằng cách sử dụng ứng dụng thanh toán học phí, bạn chấp nhận và đồng ý với các điều khoản và điều kiện đã nêu trên. Nếu bạn không đồng ý, vui lòng ngưng sử dụng ứng dụng.</p>
+          
+            <p>Cám ơn bạn đã sử dụng ứng dụng thanh toán học phí của chúng tôi!</p>
+          </body>
+          </html>
+          
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Đóng</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OTP modal -->
+    <div id="enter-otp-modal" class="modal d-none shadow-sm" tabindex="-1" style="z-index: 999; background-color: rgba(0, 0, 0, 0.6);">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Nhập mã OTP</h5>
+            <button id="btn-close-otp-modal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p id="otp-modal-message">Vui lòng nhập mã OTP gửi về email</p>
+            <div class="input-group flex-nowrap">
+              <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-code"></i></span>
+              <input id="otp" type="text" class="form-control" placeholder="Mã OTP..." aria-label="Username" aria-describedby="addon-wrapping">
+              <input type="hidden" id="transaction-id">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="otp-confirm" class="btn btn-info text-white">Gửi</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trans history modal -->
+    <div class="modal fade" id="histModal" tabindex="-1" aria-labelledby="histModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="histModal">Lịch sử giao dịch</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body hist-body">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Đóng</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spinner -->
+    <div class="d-flex justify-content-center align-items-center spinner d-none" style="z-index: 1000; background-color: rgba(0, 0, 0, 0.6);position: absolute; width: 100dvw; height: 100dvh; top: 0; left: 0;">
+      <div class="spinner-grow text-danger me-1" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="spinner-grow text-warning me-1" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="spinner-grow text-info me-1" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <div class="extension-container" style="display: flex; flex-direction: column; position: absolute; bottom: 0; right: 0; margin-bottom: 25px; margin-right: 25px;">
+      <!-- Transaction history -->
+      <button id="trans-history" class="btn btn-info logout text-white shadow-sm" data-bs-toggle="modal" data-bs-target="#histModal" style="font-size: 20px; padding: 10px; border-radius: 50%; width: 70px; height: 70px; margin-bottom: 10px;">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+      </button>
+      <!-- Logout button -->
+      <button id="logout" class="btn btn-danger logout text-white shadow-sm" style="font-size: 20px; padding: 10px; border-radius: 50%; width: 70px; height: 70px;">
+        <i class="fa-solid fa-right-from-bracket"></i>
+      </button>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="/js/home.js"></script>
+  </body>
+</html>
